@@ -1,6 +1,6 @@
 let playerImage, player;
 function preload() {
-  playerImage = loadImage('dude.png')
+  playerImage = loadImage('assets/dude.png')
 }
 
 
