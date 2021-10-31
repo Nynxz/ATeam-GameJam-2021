@@ -24,6 +24,5 @@ class AsssetManager {
         
         AsssetManager.assets.rune.on = loadImage("assets/runeOn.png")
         AsssetManager.assets.rune.off = loadImage("assets/runeOff.png")
-
     }
 }
