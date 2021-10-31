@@ -1,0 +1,65 @@
+{
+    "CONSTANTS": {
+        "DEBUG": true,
+        "SCREEN_W": 1200,
+        "SCREEN_H": 800,
+        "TILESIZE": 64
+    },
+    
+    "MAPS": {
+        "LEVEL_0": [
+            "X              X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  XXXX        X    ",
+            "X  X       X        ",
+            "X  X           XXXXX",
+            "X  X           X    ",
+            "X  XXXX        X    ",
+            "X  X           X    ",
+            "X  X    XXX         ",
+            "X            X      ",
+            "X          P        ",
+            "XXXXX XXXXXX XXXXXXX",
+            "XXXXX            XXX",
+            "XXXXX    XXXXXX    X",
+            "XXXXXXXXXXXXXXXXXXXX"
+        ]
+    }
+
+
+
+}

@@ -1,4 +1,4 @@
-class Player{
+class Player2{
     constructor(_image, _posX, _posY) {
         this.image = _image;
         this.position = createVector(_posX, _posY)
