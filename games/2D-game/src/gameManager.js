@@ -4,6 +4,7 @@
 class GameManager{
     static settings = {
         CONSTANTS: {
+            DEBUG: null,
             SCREEN_W: null,
             SCREEN_H: null,
             TILESIZE: null
@@ -20,22 +21,48 @@ class GameManager{
     static player;
 
     static preload() {
+        AsssetManager.loadAssets()
         GameManager.settings = loadJSON('settings.json')
     }
 
     static setup() {
+        frameRate(60)
+
         createCanvas(GameManager.settings.CONSTANTS.SCREEN_W, GameManager.settings.CONSTANTS.SCREEN_H)
         background(0)
         noSmooth();
         LayerManager.setupGroups();
-        GameManager.setupLevel(0)
+
+
+        let startMenu = HUDManager.createMenu([
+            new Button(width/2, 100, 600, 120, () => {
+                console.log("1"); 
+                startMenu.switchTo(secondMenu)
+            }, AsssetManager.assets.buttons.start),
+            new Button(width/2, 300, 600, 120, () => console.log("2"), AsssetManager.assets.buttons.mapEditor),
+            new Button(width/2, 700, 600, 120, () => window.location.reload(), AsssetManager.assets.buttons.back)
+        ], true)
+        
+        let secondMenu = HUDManager.createMenu([
+            new Button(width/2, 100, 900, 120, () => { 
+                console.log("4"); 
+                GameManager.setupLevel(0); 
+                secondMenu.disableAll(); 
+                LayerManager.layers.hud.isEnabled = false
+            }, AsssetManager.assets.buttons.start),
+            new Button(width/2, 700, 900, 120, () => {                
+                console.log("5"); 
+                secondMenu.switchTo(startMenu)
+            }, AsssetManager.assets.buttons.back),
+        ])
+
     }
+
 
     static loop() {
         background(0)
         LayerManager.drawLayers();
-        camera.position = GameManager.player.sprite.position
-        //drawSprites();
+        GameManager.debugFPS();
     }
 
     static setupLevel(index) {
@@ -61,5 +88,14 @@ class GameManager{
                 }
             })
         })
+    }
+
+
+    static debugFPS(){
+        // https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance#frames-per-second-fps
+        let fps = frameRate();
+        fill(0, 255, 0);
+        stroke(0);
+        text("FPS: " + fps.toFixed(2), camera.position.x - width/2 + 25, camera.position.y + height/2 - 25);
     }
 }
