@@ -38,6 +38,7 @@ class Player{
             touchingLeft: false,
         }
     }
+    
     // This function will run every frame the sprite is visible
     draw() {
         this.superDraw();
@@ -46,8 +47,11 @@ class Player{
         this.jump(iA)
         this.movement(iA, moved)
         this.applyGravity()
-        this.grabbing(iA)
-        this.slide(iA)
+        camera.position = this.sprite.position
+
+        //Disabled for now
+        //this.grabbing(iA)
+        //this.slide(iA)
 
         this.sprite.mirrorX(Math.sign(this.sprite.velocity.x))
         //this.loop();
