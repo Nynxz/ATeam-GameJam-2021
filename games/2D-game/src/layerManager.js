@@ -18,6 +18,8 @@ class LayerManager{
         LayerManager.layers.player = new Group();
         LayerManager.layers.player.isEnabled = true;
 
+        LayerManager.layers.hud = new Group();
+        LayerManager.layers.hud.isEnabled = true;
     }
     
     
