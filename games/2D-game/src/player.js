@@ -42,7 +42,7 @@ class Player{
     draw() {
         this.superDraw();
         let moved = false
-        let iA = Input.GetAxis();
+        let iA = Input.GetMovementVector2();
         this.jump(iA)
         this.movement(iA, moved)
         this.applyGravity()
@@ -151,15 +151,9 @@ class Player{
         
 
     loop() {
-        let inputV = this.getInput();            
+        let inputV = Input.GetMovementVector2()        
         this.sprite.position.x += inputV.x 
     }
-
-    getInput() {
-        let input = Input.GetAxis().x;
-        return input;
-    }
-
 
 
     preload(){
