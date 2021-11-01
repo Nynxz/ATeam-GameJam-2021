@@ -80,6 +80,10 @@ class GameManager{
                     // Create A Block          
                     GameManager.player = new Player(x * tS + (tS / 2), y * tS + (tS / 2), GameManager.settings.CONSTANTS.TILESIZE);
                 }
+                if(letter == "R"){
+                    // Create a Rune
+                    GameManager.rune = new Rune( ( x * tS + (tS / 2) ), ( y * tS + (tS / 2) ), GameManager.settings.CONSTANTS.TILESIZE);
+                }
             })
         })
     }
