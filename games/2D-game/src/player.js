@@ -26,7 +26,7 @@ class Player{
         }
 
         this.jumpTimeout = 2000
-
+        this.sprite.debug = true
         this.sprite.maxSpeed = 12
         this.isSliding = false;
     }
@@ -51,7 +51,7 @@ class Player{
 
         //Disabled for now
         //this.grabbing(iA)
-        //this.slide(iA)
+        this.slide(iA)
 
         this.sprite.mirrorX(Math.sign(this.sprite.velocity.x))
         //this.loop();
@@ -149,9 +149,9 @@ class Player{
         if(this.isAirborne){
             this.sprite.friction = 0.01
             this.sprite.velocity.y += 0.3
-        } else {
+        } else if(!this.isSliding){
             this.sprite.friction = 0.3
-            //this.sprite.velocity.y -= 0.03;
+            this.sprite.velocity.y -= 0.03;
         }
     }
         
