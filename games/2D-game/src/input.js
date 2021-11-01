@@ -17,6 +17,10 @@ class Input {
         return keyIsDown(16)
     }
 
+    static GetInteract() {
+        return keyWentDown(69)
+    }
+
     static scrollEvent(event){
         Input.hasScrolled = false;
         Input.currentScroll += event.deltaY
