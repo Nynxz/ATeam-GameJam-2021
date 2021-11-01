@@ -3,6 +3,58 @@ class HUDManager {
         return new Menu(buttons, visible);
     }
 
+    static setupMenus(){
+        let startMenu = HUDManager.createMenu([
+            new Button(width/2, 100, 600, 120, () => {
+                console.log("Start"); 
+                startMenu.switchTo(secondMenu)
+            }, AsssetManager.assets.buttons.start),
+            new Button(width/2, 300, 600, 120, () => {
+                console.log("Map Editor")
+                startMenu.switchTo(mapEditorStart)
+            }, AsssetManager.assets.buttons.mapEditor),
+            new Button(width/2, 700, 600, 120, () => window.location.reload(), AsssetManager.assets.buttons.exitButton)
+        ], true)
+        
+        let secondMenu = HUDManager.createMenu([
+            new Button(width/2, 100, 600, 120, () => { 
+                console.log("Start Game"); 
+                GameManager.setupLevel(0); 
+                secondMenu.disableAll(); 
+                LayerManager.layers.hud.isEnabled = false
+            }, AsssetManager.assets.buttons.start),
+            new Button(width/2, 700, 600, 120, () => {                
+                console.log("Back"); 
+                secondMenu.switchTo(startMenu)
+            }, AsssetManager.assets.buttons.back),
+        ])
+
+        let mapEditorStart = HUDManager.createMenu([
+            new Button(width/2, 100, 600, 120, () => { 
+                console.log("New Map"); 
+                mapEditorStart.disableAll()
+                MapEditor.setupMapEditor()
+                GameManager.inMapEditor = true;
+
+            }, AsssetManager.assets.buttons.newMapButton),
+            new Button(width/2, 400, 600, 120, () => { 
+                
+                console.log("Load Map"); 
+                loadJSON("testMap.json", (json) => {
+                    mapEditorStart.disableAll()
+                    MapEditor.setupMapEditor()
+                    MapEditor.currentMap.loadMap(json)
+                    GameManager.inMapEditor = true;
+                })
+
+            }, AsssetManager.assets.buttons.loadMapButton),
+            new Button(width/2, 700, 600, 120, () => {                
+                console.log("Load Map"); 
+                mapEditorStart.switchTo(startMenu)
+            }, AsssetManager.assets.buttons.back),
+        ])
+    }
+
 }
 
 class Button{

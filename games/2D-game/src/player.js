@@ -112,12 +112,14 @@ class Player{
             this.isAirborne = true;
         } else {
             //We are Collding
-            if(sprite.touching.left || sprite.touching.right) {
+            if((sprite.touching.left || sprite.touching.right) && (!sprite.touching.bottom)) {
                 this.timeouts.touchingRight = sprite.touching.right
                 this.timeouts.touchingLeft = sprite.touching.left
 
                 this.isTouchingSides = true
-
+                setTimeout(() => {
+                    this.clearTimeouts();
+                }, this.jumpTimeout)
                 this.sprite.velocity.x = 0
             }
             if(sprite.touching.bottom){

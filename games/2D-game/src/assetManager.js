@@ -11,6 +11,13 @@ class AsssetManager {
         rune: {
             on: null,
             off: null
+        },
+        mapEditor: {
+            currentPanel: null,
+            toolTab: null
+        },
+        map: {
+            ground: null
         }
     }
 
@@ -24,6 +31,11 @@ class AsssetManager {
         
         AsssetManager.assets.rune.on = loadImage("assets/runeOn.png")
         AsssetManager.assets.rune.off = loadImage("assets/runeOff.png")
+
+        AsssetManager.assets.mapEditor.currentPanel = loadImage("assets/currentMapTool.png")
+        AsssetManager.assets.mapEditor.toolTab = loadImage("assets/mapEditorToolTab.png")
+
+        AsssetManager.assets.map.ground = loadImage("assets/ground.png")
 
     }
 }
