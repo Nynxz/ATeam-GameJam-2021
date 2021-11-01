@@ -14,7 +14,9 @@ class AsssetManager {
         },
         mapEditor: {
             currentPanel: null,
-            toolTab: null
+            toolTab: null,
+            doorIcon: null,
+            penguinIcon: null
         },
         map: {
             ground: null
@@ -34,6 +36,8 @@ class AsssetManager {
 
         AsssetManager.assets.mapEditor.currentPanel = loadImage("assets/currentMapTool.png")
         AsssetManager.assets.mapEditor.toolTab = loadImage("assets/mapEditorToolTab.png")
+        AsssetManager.assets.mapEditor.doorIcon = loadImage("assets/doorIcon.png")
+        AsssetManager.assets.mapEditor.penguinIcon = loadImage("assets/penguinIcon.png")
 
         AsssetManager.assets.map.ground = loadImage("assets/ground.png")
 
