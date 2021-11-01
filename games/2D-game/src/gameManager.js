@@ -32,14 +32,14 @@ class GameManager{
     }
 
     static setup() {
-        frameRate(60)
-        useQuadTree(true)
+  
 
         let canvas = createCanvas(GameManager.settings.CONSTANTS.SCREEN_W, GameManager.settings.CONSTANTS.SCREEN_H)
         canvas.mouseWheel(Input.scrollEvent)
-
-        background(0)
+        frameRate(60)
+        useQuadTree(true)
         noSmooth();
+
         LayerManager.setupGroups();
         HUDManager.setupMenus();
 
@@ -56,39 +56,10 @@ class GameManager{
         if(GameManager.inMapEditor){
             MapEditor.loop();
         }
-        
+
     }
 
-    static setupLevel(index) {
-        let level = GameManager.settings.MAPS[`LEVEL_${index.toString()}`]
-        let tS = GameManager.settings.CONSTANTS.TILESIZE;
-
-        // Loop Through Each Letter of Our STRING Map
-        level.forEach((line, y) => {
-            // Spread the string into an array, and loop through
-            [...line].forEach((letter, x) => {
-                if(letter == "X"){
-                    // Create A Block          
-                    let sprite = createSprite(x * tS + (tS / 2), y * tS + (tS / 2), tS, tS)
-                    //sprite.shapeColor = color(70, 70, 70)
-                    sprite.setDefaultCollider();
-                    sprite.debug = true;
-                    sprite.immovable = true
-                    LayerManager.layers.environment.add(sprite);
-                }
-                if(letter == "P"){
-                    // Create A Block          
-                    GameManager.player = new Player(x * tS + (tS / 2), y * tS + (tS / 2), GameManager.settings.CONSTANTS.TILESIZE);
-                }
-                if(letter == "R"){
-                    // Create a Rune
-                    GameManager.rune = new Rune( ( x * tS + (tS / 2) ), ( y * tS + (tS / 2) ), GameManager.settings.CONSTANTS.TILESIZE);
-                }
-            })
-        })
-    }
-
-
+    
     static debugFPS(){
         camera.off()
         // https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance#frames-per-second-fps
