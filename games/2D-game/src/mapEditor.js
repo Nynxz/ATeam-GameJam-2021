@@ -28,15 +28,15 @@ class MapEditor {
         // Shorthand TileSize
         let tS = GameManager.settings.CONSTANTS.TILESIZE
         // Grid Coords
-        let x = Math.floor(mPos.x/(tS)) * tS + tS/4
-        let y = Math.floor(mPos.y/(tS)) * tS + tS/4
+        let x = Math.floor(mPos.x/(tS)) * tS + tS/2
+        let y = Math.floor(mPos.y/(tS)) * tS + tS/2
 
         //#region CAMERA OFF
         camera.off()
 
         MapEditor.drawToolPanel();
 
-        MapEditor.handleLeftClick()
+        MapEditor.handleLeftClick(x, y)
         MapEditor.handleRightClickSpecial(x, y)
         MapEditor.handleRightClick(x, y)
         MapEditor.handleRightClickDrag(x, y)
@@ -49,7 +49,7 @@ class MapEditor {
 
         MapEditor.drawDraggingLine(x, y)
         MapEditor.drawLinesFromSelectedToRunes();
-        MapEditor.tileOutline(mPos, tS);
+        MapEditor.tileOutline(x, y);
         MapEditor.cameraMovement();
 
 
@@ -107,11 +107,11 @@ class MapEditor {
         }
     }
 
-    static handleLeftClick() {
+    static handleLeftClick(x, y) {
         // Mouse Click (single) or Holding Shift (hold)
         if(mouseWentUp(LEFT) || (keyDown(16) && mouseDown(LEFT))){ // Create Tile
             if(!MapEditor.clicked){
-                MapEditor.testDrawTile(MapEditor.currentMap)
+                MapEditor.testDrawTile(MapEditor.currentMap, x, y)
                 MapEditor.clicked = false
             }
         }
@@ -171,13 +171,13 @@ class MapEditor {
         }
     }
 
-    static tileOutline(mPos, tS) {
+    static tileOutline(x, y) {
         rectMode(CENTER)
         fill(0,0,0,0)
         stroke(0,255,0)
         rect(            
-            Math.floor(mPos.x/(tS)) * tS + tS/4,
-            Math.floor(mPos.y/(tS)) * tS + tS/4,
+            x,
+            y,
             64,
             64
         )
@@ -203,14 +203,14 @@ class MapEditor {
         )
     }
 
-    static testDrawTile(to){
+    static testDrawTile(to, x, y){
         if(!MapEditor.clicked && MapEditor.currentTool){
             console.log("Clicked: true")
             MapEditor.clicked = true
-            let mPos = MapEditor.getMouseWorldPosition()
-            let tS = GameManager.settings.CONSTANTS.TILESIZE
-            let x = Math.floor(mPos.x/(tS)) * tS + tS/4
-            let y = Math.floor(mPos.y/(tS)) * tS + tS/4
+            // let mPos = MapEditor.getMouseWorldPosition()
+            // let tS = GameManager.settings.CONSTANTS.TILESIZE
+            // let x = Math.floor(mPos.x/(tS)) * tS + tS/4
+            // let y = Math.floor(mPos.y/(tS)) * tS + tS/4
             let tile = {
                 type: MapEditor.currentTool,
                 x: x,
@@ -316,6 +316,8 @@ class Map{
                 case Tile.types.RUNE:
                     let rune = new Rune( x, y, GameManager.settings.CONSTANTS.TILESIZE);
                     sprite = rune.sprite
+                    sprite.setDefaultCollider()
+
                 break;
 
                 case Tile.types.DOOR:
@@ -334,7 +336,7 @@ class Map{
 
                     sprite.addImage(type, image)
                     sprite.scale = 1
-
+                    sprite.setDefaultCollider()
                     LayerManager.layers.environment.add(sprite)
                 break;
             }
