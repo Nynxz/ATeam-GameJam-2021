@@ -4,7 +4,7 @@ class Rune {
         this.sprite = createSprite(x, y, tS, tS);
         this.sprite.addImage("Disabled", AsssetManager.assets.rune.off);
         this.sprite.addImage("Enabled", AsssetManager.assets.rune.on);
-        this.sprite.scale = 2;
+        this.sprite.scale = 1;
         this.status = false;
         // Define a number for sequence on initialisation
         this.number = null;
@@ -12,6 +12,9 @@ class Rune {
         this.sprite.draw = this.draw.bind(this);
         this.sprite.debug = true;
         LayerManager.layers.environment.add(this.sprite);
+
+
+        this.onTimeout = false
     }
 
     getNumber(){
@@ -26,9 +29,27 @@ class Rune {
         this.superDraw();
 
         if (dist(this.sprite.position.x, this.sprite.position.y, GameManager.player.sprite.position.x, GameManager.player.sprite.position.y) < 180){
+            let tileXY = `_${this.sprite.position.x}${this.sprite.position.y}`
+            let tile = GameManager.currentLevel.tileMap[tileXY].saveInfo
+            tile.isActive = true;
             this.sprite.changeImage("Enabled");
+            if(this.timeout != undefined){
+                clearTimeout(this.timeout)
+                this.onTimeout = false
+            }
         }else {
-            this.sprite.changeImage("Disabled");
+            let tileXY = `_${this.sprite.position.x}${this.sprite.position.y}`
+            let tile = GameManager.currentLevel.tileMap[tileXY].saveInfo
+            if(tile.isActive){
+                if(!this.onTimeout){
+                    this.timeout = setTimeout(() => {
+                        tile.isActive = false
+                        this.onTimeout = false
+                        this.sprite.changeImage("Disabled");
+                    }, 2000)
+                    this.onTimeout = true;
+                }
+            }            
         }
     }
 }
