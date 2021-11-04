@@ -5,13 +5,18 @@ class MapEditor {
     }
     static panel = null;
     static currentMap;
+    static tileOptions
+
     static currentTool;
     static currentTile;
-
     static isDragging = false;
 
     static currentPage = 0;
     static pageGroup;
+    static optionsGroup = {
+        buttonEnvironment: null,
+        buttonCurrent: null
+    };
 
     static setupMapEditor(){
         MapEditor.setupHUD()
@@ -43,6 +48,8 @@ class MapEditor {
 
         MapEditor.drawMouseCoords(mPos)
 
+        MapEditor.showCurrentTileOptions()
+
         camera.on()
         //#endregion CAMERA ON
 
@@ -52,11 +59,28 @@ class MapEditor {
         MapEditor.tileOutline(x, y);
         MapEditor.cameraMovement();
 
+        MapEditor.drawSelectedOptions()
 
         MapEditor.saveMap()
         MapEditor.paintUndo()
 
         MapEditor.clicked = false
+    }
+
+    static drawSelectedOptions() {
+        if(MapEditor.currentTile != undefined){
+            switch(MapEditor.currentTile.type) {
+                case Tile.types.NEXTLEVEL:
+                    console.log("Next Level")
+                break;
+
+                case Tile.types.RUNE:
+                    console.log("Rune")
+                    stroke(0, 255, 0)
+                    circle(MapEditor.currentTile.x, MapEditor.currentTile.y, MapEditor.currentTile.info.radius)
+                break;
+            }
+        }
     }
 
     static handleRightClickDrag(x, y){
@@ -94,6 +118,9 @@ class MapEditor {
             MapEditor.currentTile = MapEditor.currentMap.selectTile(x, y)
             console.log("Selected Tile")
             console.log(MapEditor.currentTile)
+            if(MapEditor.currentTile != undefined){
+                // Create Menu
+            }
         }
     }
 
@@ -120,7 +147,8 @@ class MapEditor {
     static drawToolPanel(){
         // Draw Tool Panel and Panel Items and Current Tool
         drawSprite(MapEditor.panel)
-        drawSprites(MapEditor.pageGroup) 
+        drawSprites(MapEditor.pageGroup)  
+        drawSprite(MapEditor.tileOptions)
         image(AsssetManager.assets.mapEditor.currentPanel, width-AsssetManager.assets.mapEditor.currentPanel.width, height-AsssetManager.assets.mapEditor.currentPanel.height)
         if(MapEditor.currentTool){
             image(Tile.getTileImage(MapEditor.currentTool), width-AsssetManager.assets.mapEditor.currentPanel.width + 50, height-AsssetManager.assets.mapEditor.currentPanel.height + 60)
@@ -216,6 +244,14 @@ class MapEditor {
                 x: x,
                 y: y 
             }
+            switch(MapEditor.currentTool){
+                case Tile.types.RUNE:
+                    tile.info = {
+                        radius: 150,
+                        secondsToActivate: 2
+                    }
+                break;
+            }
             MapEditor.currentMap.createTile(to, tile)
 
         }
@@ -251,7 +287,145 @@ class MapEditor {
         }
         MapEditor.setupPage()
 
+
+        MapEditor.tileOptions = createSprite(width+100, height/2-50, 500, 500)
+        MapEditor.tileOptions.addImage(AsssetManager.assets.mapEditor.optionsTab)
+        MapEditor.tileOptions.setCollider("rectangle",-100, 0, 50, 200)
+        MapEditor.tileOptions.debug = true
+        MapEditor.tileOptions.modifier = 0
+        MapEditor.setupOptions()
+        MapEditor.tileOptions.onMouseReleased  = () => {
+            if(!MapEditor.clicked){
+                console.log("Clicked");
+                console.log("Clicked: true")
+                MapEditor.clicked = true;
+                if(MapEditor.tileOptions.modifier == 200){
+                    MapEditor.tileOptions.modifier = 0
+                    MapEditor.optionsGroup.buttonCurrent.hide()
+                    MapEditor.optionsGroup.textBackground.hide()
+                    MapEditor.optionsGroup.buttonEnvironment.hide()
+
+                } else {
+                    MapEditor.tileOptions.modifier = 200
+                    MapEditor.optionsGroup.buttonCurrent.show()
+                    MapEditor.optionsGroup.buttonEnvironment.show()
+                    MapEditor.optionsGroup.textBackground.show()
+                }
+                console.log(MapEditor.optionsGroup.currentOption)
+                MapEditor.tileOptions.position.x = width+100 - MapEditor.tileOptions.modifier
+            }
+        }
+
+
         camera.on()
+    }
+
+    static showCurrentTileOptions() {
+        //MapEditor.optionsGroup.buttonCurrent.hide()
+        MapEditor.optionsGroup.textNextLevel.hide()
+        MapEditor.optionsGroup.textNextDoor.hide()
+        MapEditor.optionsGroup.textRuneSeconds.hide()
+        MapEditor.optionsGroup.textRuneRadius.hide()
+
+        if(MapEditor.currentTile == undefined || MapEditor.tileOptions.modifier == 0 || MapEditor.optionsGroup.currentOption != "currenttile"){
+            return
+        }
+        
+
+        switch(MapEditor.currentTile.type){
+            case Tile.types.NEXTLEVEL:
+                console.log("Show Button")
+                MapEditor.optionsGroup.buttonCurrent.show()
+                MapEditor.optionsGroup.textNextLevel.show()
+                MapEditor.optionsGroup.textNextDoor.show()
+                fill(0)
+                text("Next Level: ", width - 75, height/2-245)
+                text("Next Door: ", width - 75, height/2-210)
+                fill(255)
+                text(MapEditor.currentTile.nextLevelName, width - 75, height/2-225)
+                text(MapEditor.currentTile.nextLevelDoor, width - 75, height/2-190)
+            break
+            case Tile.types.DOOR:
+                console.log("Show Button")
+                MapEditor.optionsGroup.buttonCurrent.show()
+            break
+            case Tile.types.RUNE:
+                console.log("Show Button")
+                MapEditor.optionsGroup.textRuneSeconds.show()
+                MapEditor.optionsGroup.textRuneRadius.show()
+                text("Seconds Off: ", width - 75, height/2-245)
+                text("Radius: ", width - 75, height/2-210)
+                if(MapEditor.currentTile.info.secondsToActivate)
+                text(MapEditor.currentTile.info.secondsToActivate, width - 75, height/2-225)
+                text(MapEditor.currentTile.info.radius, width - 75, height/2-190)
+            break
+        }
+    }
+
+    static setupOptions() {
+
+        MapEditor.optionsGroup.buttonEnvironment = createButton("Environment");
+        MapEditor.optionsGroup.buttonEnvironment.position(width - 180, height/2-280)
+        MapEditor.optionsGroup.buttonEnvironment.mousePressed(() => {
+            MapEditor.optionsGroup.currentOption = "environment"
+            MapEditor.optionsGroup.textBackground.show()
+
+        })
+        MapEditor.optionsGroup.buttonEnvironment.hide()
+
+        MapEditor.optionsGroup.textNextLevel = createInput('Next Level')
+        MapEditor.optionsGroup.textNextLevel.position(width - 180, height/2-250)
+        MapEditor.optionsGroup.textNextLevel.size(80)
+        MapEditor.optionsGroup.textNextLevel.input(setLevelNext)
+        function setLevelNext() {
+            MapEditor.currentTile.nextLevelName = this.value()
+        }
+        MapEditor.optionsGroup.textNextLevel.hide()
+
+        MapEditor.optionsGroup.textNextDoor = createInput('Next Door')
+        MapEditor.optionsGroup.textNextDoor.position(width - 180, height/2-210)
+        MapEditor.optionsGroup.textNextDoor.size(80)
+        MapEditor.optionsGroup.textNextDoor.input(setLevelDoor)
+        function setLevelDoor() {
+            MapEditor.currentTile.nextLevelDoor = this.value()
+        }
+        MapEditor.optionsGroup.textNextDoor.hide()
+
+        MapEditor.optionsGroup.textBackground = createInput('Background')
+        MapEditor.optionsGroup.textBackground.position(width - 180, height/2-250)
+        MapEditor.optionsGroup.textBackground.size(80)
+        MapEditor.optionsGroup.textBackground.hide()
+
+        
+        MapEditor.optionsGroup.textRuneSeconds = createInput('Seconds')
+        MapEditor.optionsGroup.textRuneSeconds.position(width - 180, height/2-250)
+        MapEditor.optionsGroup.textRuneSeconds.size(80)
+        MapEditor.optionsGroup.textRuneSeconds.input(setSecondsRune)
+        function setSecondsRune() {
+            MapEditor.currentTile.info.secondsToActivate = parseInt(this.value())
+        }
+        MapEditor.optionsGroup.textRuneSeconds.hide()
+
+        MapEditor.optionsGroup.textRuneRadius = createInput('Radius')
+        MapEditor.optionsGroup.textRuneRadius.position(width - 180, height/2-210)
+        MapEditor.optionsGroup.textRuneRadius.size(80)
+        MapEditor.optionsGroup.textRuneRadius.input(setRadiusRune)
+        function setRadiusRune() {
+            MapEditor.currentTile.info.radius = parseInt(this.value())
+        }
+        MapEditor.optionsGroup.textRuneRadius.hide()
+
+        MapEditor.optionsGroup.buttonCurrent = createButton("Current Tile");
+        MapEditor.optionsGroup.buttonCurrent.position(width - 90, height/2-280)
+        MapEditor.optionsGroup.buttonCurrent.mousePressed(() => {
+            MapEditor.optionsGroup.currentOption = "currenttile"
+            MapEditor.optionsGroup.textBackground.hide()
+
+        })
+
+
+        MapEditor.optionsGroup.buttonCurrent.hide()
+
     }
 
     static setupPage(index) {
@@ -261,7 +435,7 @@ class MapEditor {
             {name: "rune", image: AsssetManager.assets.rune.off},
             {name: "player", image: AsssetManager.assets.mapEditor.penguinIcon},
             {name: "door", image: AsssetManager.assets.mapEditor.doorIcon},
-            {name: "concrete", image: AsssetManager.assets.map.ground},
+            {name: "nextlevel", image: AsssetManager.assets.map.nextLevelDoor},
             {name: "concrete", image: AsssetManager.assets.map.ground},
             {name: "concrete", image: AsssetManager.assets.map.ground},
         ]
@@ -314,7 +488,7 @@ class Map{
                 break;
 
                 case Tile.types.RUNE:
-                    let rune = new Rune( x, y, GameManager.settings.CONSTANTS.TILESIZE);
+                    let rune = new Rune( x, y, GameManager.settings.CONSTANTS.TILESIZE, tile.info.secondsToActivate, tile.info.radius);
                     sprite = rune.sprite
                     sprite.setDefaultCollider()
 
@@ -324,6 +498,12 @@ class Map{
                     console.log(tile)
                     let door = new Door( x, y, tile.runes);
                     sprite = door.sprite
+                break;
+
+
+                case Tile.types.NEXTLEVEL:
+                    let nextlevel = new NextLevelDoor(x, y, tile.nextLevelName, tile.NextLevelDoor)
+                    sprite  = nextlevel.sprite
                 break;
 
                 default:
@@ -389,6 +569,7 @@ class Map{
     }
 
     loadMap(json, to, playing=false){
+        GameManager.fade = 300
         Object.values(json).forEach(tile => {
             console.log(tile)
             this.createTile(to, tile, playing)
@@ -436,7 +617,8 @@ class Tile {
         CONCRETE: "concrete",
         RUNE: "rune",
         PLAYER: "player",
-        DOOR: "door"
+        DOOR: "door",
+        NEXTLEVEL: "nextlevel"
     }
 
     constructor(type, x, y){
@@ -458,6 +640,10 @@ class Tile {
 
             case Tile.types.DOOR:
                 return AsssetManager.assets.mapEditor.doorIcon
+
+            case Tile.types.NEXTLEVEL:
+                return AsssetManager.assets.map.nextLevelDoor
+
         }
     }
 }

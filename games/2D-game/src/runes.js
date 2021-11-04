@@ -1,5 +1,5 @@
 class Rune {
-    constructor(x, y, tS){
+    constructor(x, y, tS, secondsToActivate, radius){
         // tS is defined in the gameManager.js file where we initialise the game.
         this.sprite = createSprite(x, y, tS, tS);
         this.sprite.addImage("Disabled", AsssetManager.assets.rune.off);
@@ -13,7 +13,8 @@ class Rune {
         this.sprite.debug = true;
         LayerManager.layers.environment.add(this.sprite);
 
-
+        this.secondsToActivate = secondsToActivate
+        this.radius = radius
         this.onTimeout = false
     }
 
@@ -28,7 +29,7 @@ class Rune {
     draw(){
         this.superDraw();
 
-        if (dist(this.sprite.position.x, this.sprite.position.y, GameManager.player.sprite.position.x, GameManager.player.sprite.position.y) < 180){
+        if (dist(this.sprite.position.x, this.sprite.position.y, GameManager.player.sprite.position.x, GameManager.player.sprite.position.y) < (this.radius/2)){
             let tileXY = `_${this.sprite.position.x}${this.sprite.position.y}`
             let tile = GameManager.currentLevel.tileMap[tileXY].saveInfo
             tile.isActive = true;
@@ -46,7 +47,7 @@ class Rune {
                         tile.isActive = false
                         this.onTimeout = false
                         this.sprite.changeImage("Disabled");
-                    }, 2000)
+                    }, this.secondsToActivate * 1000)
                     this.onTimeout = true;
                 }
             }            

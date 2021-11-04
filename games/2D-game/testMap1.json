@@ -74,6 +74,15 @@
     "x": 992,
     "y": 672
   },
+  "_544608": {
+    "type": "rune",
+    "x": 544,
+    "y": 608,
+    "toActivate": {
+      "x": 992,
+      "y": 544
+    }
+  },
   "_992416": {
     "type": "concrete",
     "x": 992,
@@ -183,10 +192,6 @@
         "type": "rune",
         "x": 544,
         "y": 608,
-        "info": {
-          "radius": 150,
-          "secondsToActivate": 5
-        },
         "toActivate": {
           "x": 992,
           "y": 544
@@ -324,6 +329,15 @@
     "x": 1312,
     "y": 96
   },
+  "_124832": {
+    "type": "rune",
+    "x": 1248,
+    "y": 32,
+    "toActivate": {
+      "x": 544,
+      "y": -32
+    }
+  },
   "_544-32": {
     "type": "door",
     "x": 544,
@@ -333,29 +347,26 @@
         "type": "rune",
         "x": 1248,
         "y": 32,
-        "info": {
-          "radius": 150,
-          "secondsToActivate": null
-        },
         "toActivate": {
           "x": 544,
           "y": -32
         }
       },
-      "_544-96": {
+      "_608-96": {
         "type": "rune",
-        "x": 544,
+        "x": 608,
         "y": -96,
-        "info": {
-          "radius": 150,
-          "secondsToActivate": 2
-        },
         "toActivate": {
           "x": 544,
           "y": -32
         }
       }
     }
+  },
+  "_544-96": {
+    "type": "concrete",
+    "x": 544,
+    "y": -96
   },
   "_1248608": {
     "type": "concrete",
@@ -491,6 +502,15 @@
     "type": "player",
     "x": 96,
     "y": 32
+  },
+  "_608-96": {
+    "type": "rune",
+    "x": 608,
+    "y": -96,
+    "toActivate": {
+      "x": 544,
+      "y": -32
+    }
   },
   "_-32-96": {
     "type": "concrete",
@@ -642,10 +662,37 @@
     "x": 32,
     "y": -800
   },
+  "_-32-224": {
+    "type": "rune",
+    "x": -32,
+    "y": -224,
+    "toActivate": {
+      "x": 352,
+      "y": -736
+    }
+  },
   "_-32-288": {
     "type": "concrete",
     "x": -32,
     "y": -288
+  },
+  "_224-416": {
+    "type": "rune",
+    "x": 224,
+    "y": -416,
+    "toActivate": {
+      "x": 352,
+      "y": -736
+    }
+  },
+  "_-32-608": {
+    "type": "rune",
+    "x": -32,
+    "y": -608,
+    "toActivate": {
+      "x": 352,
+      "y": -736
+    }
   },
   "_352-736": {
     "type": "door",
@@ -656,10 +703,6 @@
         "type": "rune",
         "x": -32,
         "y": -608,
-        "info": {
-          "radius": 150,
-          "secondsToActivate": 2
-        },
         "toActivate": {
           "x": 352,
           "y": -736
@@ -669,10 +712,6 @@
         "type": "rune",
         "x": 224,
         "y": -416,
-        "info": {
-          "radius": 150,
-          "secondsToActivate": 2
-        },
         "toActivate": {
           "x": 352,
           "y": -736
@@ -682,10 +721,6 @@
         "type": "rune",
         "x": -32,
         "y": -224,
-        "info": {
-          "radius": 150,
-          "secondsToActivate": 3
-        },
         "toActivate": {
           "x": 352,
           "y": -736
@@ -747,10 +782,6 @@
         "type": "rune",
         "x": 1248,
         "y": 480,
-        "info": {
-          "radius": 150,
-          "secondsToActivate": 2
-        },
         "toActivate": {
           "x": 992,
           "y": 288
@@ -762,6 +793,15 @@
     "type": "concrete",
     "x": 992,
     "y": 224
+  },
+  "_1248480": {
+    "type": "rune",
+    "x": 1248,
+    "y": 480,
+    "toActivate": {
+      "x": 992,
+      "y": 288
+    }
   },
   "_992160": {
     "type": "concrete",
@@ -779,96 +819,5 @@
     "y": -288,
     "nextLevelName": "testMap2.json",
     "nextLevelDoor": "door_1"
-  },
-  "_544608": {
-    "type": "rune",
-    "x": 544,
-    "y": 608,
-    "info": {
-      "radius": 150,
-      "secondsToActivate": 5
-    },
-    "toActivate": {
-      "x": 992,
-      "y": 544
-    }
-  },
-  "_1248480": {
-    "type": "rune",
-    "x": 1248,
-    "y": 480,
-    "info": {
-      "radius": 150,
-      "secondsToActivate": 2
-    },
-    "toActivate": {
-      "x": 992,
-      "y": 288
-    }
-  },
-  "_124832": {
-    "type": "rune",
-    "x": 1248,
-    "y": 32,
-    "info": {
-      "radius": 150,
-      "secondsToActivate": 4
-    },
-    "toActivate": {
-      "x": 544,
-      "y": -32
-    }
-  },
-  "_544-96": {
-    "type": "rune",
-    "x": 544,
-    "y": -96,
-    "info": {
-      "radius": 150,
-      "secondsToActivate": 2
-    },
-    "toActivate": {
-      "x": 544,
-      "y": -32
-    }
-  },
-  "_-32-224": {
-    "type": "rune",
-    "x": -32,
-    "y": -224,
-    "info": {
-      "radius": 150,
-      "secondsToActivate": 3
-    },
-    "toActivate": {
-      "x": 352,
-      "y": -736
-    }
-  },
-  "_224-416": {
-    "type": "rune",
-    "x": 224,
-    "y": -416,
-    "info": {
-      "radius": 150,
-      "secondsToActivate": 2
-    },
-    "toActivate": {
-      "x": 352,
-      "y": -736
-    }
-  },
-  "_-32-608": {
-    "type": "rune",
-    "x": -32,
-    "y": -608,
-    "info": {
-      "radius": 150,
-      "secondsToActivate": 2
-    },
-    "toActivate": {
-      "x": 352,
-      "y": -736
-    }
   }
 }

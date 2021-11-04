@@ -25,6 +25,7 @@ class GameManager{
 
     static inMapEditor = false;
 
+    static fadingToBlack = false;
 
     static preload() {
         AsssetManager.loadAssets()
@@ -56,8 +57,11 @@ class GameManager{
         if(GameManager.inMapEditor){
             MapEditor.loop();
         }
-
+        rectMode(CORNER)
+        image(LayerManager.testBuffer, 0, 0)
     }
+
+
 
     
     static debugFPS(){
@@ -67,6 +71,27 @@ class GameManager{
         fill(0, 255, 0);
         stroke(0);
         text("FPS: " + fps.toFixed(2), 25, 25);
+
+        if(GameManager.fadingToBlack){
+            GameManager.fadeToBlack()
+        } else {
+            GameManager.fadeFromBlack()
+        }
         camera.on()
+    }
+
+    static fade = 0
+    static fadeToBlack() {
+        fill(0, 0, 0, GameManager.fade)
+        rect(0,0, width, height)
+        GameManager.fade += 6
+    }
+
+    static fadeFromBlack() {
+        if(GameManager.fade > 0){
+            fill(0, 0, 0, GameManager.fade)
+            rect(0,0, width, height)
+            GameManager.fade -= 5
+        }
     }
 }

@@ -11,6 +11,8 @@ class LayerManager{
         hud: null
     }
 
+    static testBuffer = null;
+
     static setupGroups() {
         LayerManager.layers.environment = new Group();
         LayerManager.layers.environment.isEnabled = true;
@@ -20,6 +22,8 @@ class LayerManager{
 
         LayerManager.layers.hud = new Group();
         LayerManager.layers.hud.isEnabled = true;
+
+        LayerManager.testBuffer = createGraphics(8000, 8000)
     }
     
     

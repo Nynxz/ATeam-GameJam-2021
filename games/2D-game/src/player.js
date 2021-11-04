@@ -29,6 +29,8 @@ class Player{
         this.sprite.debug = true
         this.sprite.maxSpeed = 12
         this.isSliding = false;
+
+        this.disabledMovement = false;
     }
 
 
@@ -136,10 +138,12 @@ class Player{
             (sprite.touching.right && iA.x < 0) ||
             (!sprite.touching.left && !sprite.touching.right)
         ){
-            if(!this.isAirborne){
-                sprite.velocity.x += (iA.x * this.movementSpeed);
-            } else {
-                sprite.velocity.x += (iA.x * this.movementSpeed/10);
+            if(!this.disabledMovement){
+                if(!this.isAirborne){
+                    sprite.velocity.x += (iA.x * this.movementSpeed);
+                } else {
+                    sprite.velocity.x += (iA.x * this.movementSpeed/10);
+                }
             }
         }
 
