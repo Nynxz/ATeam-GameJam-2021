@@ -20,11 +20,16 @@ class AsssetManager {
             penguinIcon: null
         },
         map: {
+            clouds: null,
             ground: null,
             nextLevelDoor: null
         },
         enemy: {
             blob: null
+        },
+        tombStone: null,
+        weapons: {
+            pistol: null
         }
     }
 
@@ -45,9 +50,14 @@ class AsssetManager {
         AsssetManager.assets.mapEditor.doorIcon = loadImage("assets/doorIcon.png")
         AsssetManager.assets.mapEditor.penguinIcon = loadImage("assets/penguinIcon.png")
 
+        AsssetManager.assets.map.clouds = loadImage("assets/clouds.png")
         AsssetManager.assets.map.ground = loadImage("assets/ground.png")
         AsssetManager.assets.map.nextLevelDoor = loadImage("assets/nextLevelDoor.png")
 
         AsssetManager.assets.enemy.blob = loadImage("assets/blob.png")
+        AsssetManager.assets.tombStone = loadImage("assets/tombStone.png")
+
+        AsssetManager.assets.weapons.pistol = loadImage("assets/pistol.png")
+
     }
 }

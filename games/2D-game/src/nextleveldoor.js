@@ -37,10 +37,10 @@ class NextLevelDoor{
         GameManager.fadingToBlack = true;
         loadJSON(levelName, (json) => {
             setTimeout(function() {
+                
                 GameManager.fadingToBlack = false;
+                GameManager.player.disabledMovement = false;
                 LayerManager.layers.environment.removeSprites()
-                removeSprite(GameManager.player.sprite)
-                delete GameManager.player
                 GameManager.currentLevel = new Map()
                 GameManager.currentLevel.loadMap(json, GameManager.currentLevel, true)
             }.bind(this), 1000)

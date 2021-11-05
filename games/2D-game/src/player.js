@@ -32,8 +32,35 @@ class Player{
 
         this.disabledMovement = false;
 
-        //Todd adding hp
-        this.health = 1;
+
+        this.health = 100
+        this.maxHealth = 100
+
+        this.weapon = createSprite(this.sprite.position.x, this.sprite.position.y)
+        LayerManager.layers.player.add(this.weapon)
+        this.weapon.addImage("pistol", AsssetManager.assets.weapons.pistol)
+        this.weapon.scale = 2
+
+    }
+
+    heal(amount){
+        this.health += amount
+        if(this.health > this.maxHealth){
+            this.health = this.maxHealth
+        }
+    }
+
+    damage(amount){
+        this.health -= amount
+        if(this.health <= 0){
+            this.health = 0
+            this.die()
+        }
+    }
+
+    die() {
+        GameManager.player.disabledMovement = true;
+        this.sprite.changeImage("dead")
     }
 
 
@@ -47,6 +74,9 @@ class Player{
     // This function will run every frame the sprite is visible
     draw() {
         this.superDraw();
+        this.weapon.position = this.sprite.position
+
+        //console.log(this.weapon.rotation)
         let moved = false
         let iA = Input.GetMovementVector2();
         this.jump(iA)
@@ -59,6 +89,12 @@ class Player{
         this.slide(iA)
 
         this.sprite.mirrorX(Math.sign(this.sprite.velocity.x))
+
+        camera.off()
+        rectMode(CENTER)
+        rect(this.sprite.position.x, this.sprite.position.y - 50, this.health, 10)
+        text(Math.floor(this.health), this.sprite.position.x-10, this.sprite.position.y - 60)
+        camera.on()
         //this.loop();
         this.enemyCollision();
     }
@@ -129,7 +165,14 @@ class Player{
                 this.sprite.velocity.x = 0
             }
             if(sprite.touching.bottom){
+                if(this.isAirborne){
+                    // Get Velocity
+                    // Add Fall Damage
+                    if(this.sprite.velocity.y > 11.5)
+                    this.damage(this.sprite.velocity.y)
+                }
                 this.isAirborne = false;
+                
             }
             if(sprite.touching.top) {
                 this.sprite.velocity.y = 0
@@ -237,6 +280,7 @@ class Player{
             {'name':'player_grab01', 'frame':{'x':384, 'y': 0, 'width': 32, 'height': 32}},
         ], 3, this.sprite, false)
 
+        this.sprite.addImage("dead", AsssetManager.assets.tombStone)
         this.sprite.changeAnimation("stand")
 
     }

@@ -483,8 +483,15 @@ class Map{
             switch(type){
 
                 case Tile.types.PLAYER:
-                    GameManager.player = new Player(x, y, GameManager.settings.CONSTANTS.TILESIZE);
-                    sprite = GameManager.player.sprite
+                    if(GameManager.player == undefined){
+                        GameManager.player = new Player(x, y, GameManager.settings.CONSTANTS.TILESIZE);
+                        sprite = GameManager.player.sprite
+                    }
+                    else {
+                        GameManager.player.sprite.position.x = x
+                        GameManager.player.sprite.position.y = y
+                        sprite = GameManager.player.sprite
+                    }
                 break;
 
                 case Tile.types.RUNE:
@@ -525,6 +532,7 @@ class Map{
                     LayerManager.layers.environment.add(sprite)
                 break;
             }
+            if(type != Tile.types.PLAYER)
             to.addTile(sprite, tile)
             
         } else {

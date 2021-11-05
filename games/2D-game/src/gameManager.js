@@ -50,7 +50,34 @@ class GameManager{
 
     static loop() {
         background(0)
+        let a
 
+
+        camera.off()
+
+        image(AsssetManager.assets.map.clouds, 0, 0, width, height)
+        angleMode(DEGREES);
+
+
+        camera.on()
+        if(GameManager.player){
+            let mPos = MapEditor.getMouseWorldPosition()
+            let tS = GameManager.settings.CONSTANTS.TILESIZE
+
+            let x = Math.floor(mPos.x/(tS)) * tS + tS/2
+            let y = Math.floor(mPos.y/(tS)) * tS + tS/2
+            a = atan2(mPos.y - GameManager.player.weapon.position.y, mPos.x - GameManager.player.weapon.position.x);
+            if(a + 90 > 0 && a + 90 < 180){
+                GameManager.player.weapon.mirrorY(1)
+                GameManager.player.weapon.rotation = a
+
+            } else {
+                GameManager.player.weapon.mirrorY(-1)
+                GameManager.player.weapon.rotation = a * -1
+            }
+            // let r = rect(GameManager.player.weapon.position.x, GameManager.player.weapon.position.y, 50, 100)
+            // r.rotate(a)
+        }
         LayerManager.drawLayers();
         GameManager.debugFPS();
 
@@ -85,6 +112,8 @@ class GameManager{
         fill(0, 0, 0, GameManager.fade)
         rect(0,0, width, height)
         GameManager.fade += 6
+        if(GameManager.player)
+        GameManager.player.disabledMovement = true;
     }
 
     static fadeFromBlack() {
@@ -92,6 +121,8 @@ class GameManager{
             fill(0, 0, 0, GameManager.fade)
             rect(0,0, width, height)
             GameManager.fade -= 5
+        } else {
+
         }
     }
 }
