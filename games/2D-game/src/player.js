@@ -31,6 +31,9 @@ class Player{
         this.isSliding = false;
 
         this.disabledMovement = false;
+
+        //Todd adding hp
+        this.health = 1;
     }
 
 
@@ -57,6 +60,7 @@ class Player{
 
         this.sprite.mirrorX(Math.sign(this.sprite.velocity.x))
         //this.loop();
+        this.enemyCollision();
     }
 
     grabbing(iA){
@@ -157,6 +161,36 @@ class Player{
             this.sprite.friction = 0.3
             this.sprite.velocity.y -= 0.03;
         }
+    }
+
+    heal(amount){
+        this.health += amount
+        if(this.health > this.maxHealth){
+            this.health = this.maxHealth
+        }
+    }
+
+    enemyCollision(){
+        if (this.sprite.collide(LayerManager.layers.enemy)){
+            this.health = 0;
+        }
+        if(this.health <= 0){
+            this.health = 0
+            this.die()
+        }
+    }
+
+    damage(amount){
+        this.health -= amount
+        if(this.health <= 0){
+            this.health = 0
+            this.die()
+        }
+    }
+
+    die() {
+        GameManager.player.disabledMovement = true; //<-- maybe change to this.disabledMovement 
+        this.sprite.changeImage("dead")
     }
         
 

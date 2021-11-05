@@ -432,7 +432,7 @@ class MapEditor {
 
         let pageItems = [
             {name: "concrete", image: AsssetManager.assets.map.ground},
-            {name: "rune", image: AsssetManager.assets.rune.off},
+            {name: "enemy", image: AsssetManager.assets.enemy.blob},
             {name: "player", image: AsssetManager.assets.mapEditor.penguinIcon},
             {name: "door", image: AsssetManager.assets.mapEditor.doorIcon},
             {name: "nextlevel", image: AsssetManager.assets.map.nextLevelDoor},
@@ -504,6 +504,11 @@ class Map{
                 case Tile.types.NEXTLEVEL:
                     let nextlevel = new NextLevelDoor(x, y, tile.nextLevelName, tile.NextLevelDoor)
                     sprite  = nextlevel.sprite
+                break;
+
+                case Tile.types.Enemy:
+                    let enemy = new BlobEnemy(x, y)
+                    sprite = enemy.sprite
                 break;
 
                 default:
@@ -618,7 +623,8 @@ class Tile {
         RUNE: "rune",
         PLAYER: "player",
         DOOR: "door",
-        NEXTLEVEL: "nextlevel"
+        NEXTLEVEL: "nextlevel",
+        Enemy: "enemy"
     }
 
     constructor(type, x, y){
@@ -644,6 +650,8 @@ class Tile {
             case Tile.types.NEXTLEVEL:
                 return AsssetManager.assets.map.nextLevelDoor
 
+            case Tile.types.Enemy:
+                return AsssetManager.assets.enemy.blob
         }
     }
 }

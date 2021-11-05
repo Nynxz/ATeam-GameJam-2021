@@ -8,10 +8,11 @@ class LayerManager{
     static layers = {
         environment: null,
         player: null,
-        hud: null
+        hud: null,
+        enemy: null
     }
 
-    static testBuffer = null;
+    static testBuffer = null; 
 
     static setupGroups() {
         LayerManager.layers.environment = new Group();
@@ -22,6 +23,9 @@ class LayerManager{
 
         LayerManager.layers.hud = new Group();
         LayerManager.layers.hud.isEnabled = true;
+
+        LayerManager.layers.enemy = new Group();
+        LayerManager.layers.enemy.isEnabled = true;
 
         LayerManager.testBuffer = createGraphics(8000, 8000)
     }

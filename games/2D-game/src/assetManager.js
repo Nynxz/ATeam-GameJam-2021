@@ -22,6 +22,9 @@ class AsssetManager {
         map: {
             ground: null,
             nextLevelDoor: null
+        },
+        enemy: {
+            blob: null
         }
     }
 
@@ -45,5 +48,6 @@ class AsssetManager {
         AsssetManager.assets.map.ground = loadImage("assets/ground.png")
         AsssetManager.assets.map.nextLevelDoor = loadImage("assets/nextLevelDoor.png")
 
+        AsssetManager.assets.enemy.blob = loadImage("assets/blob.png")
     }
 }

@@ -48,7 +48,7 @@ class HUDManager {
             }, AsssetManager.assets.buttons.newMapButton),
             // Load Map
             new Button(width/2, 400, 600, 120, () => {                 
-                loadJSON("testMap3.json", (json) => {
+                loadJSON("testMap.json", (json) => {
                     mapEditorStart.disableAll()
                     MapEditor.setupMapEditor()
                     MapEditor.currentMap.loadMap(json, MapEditor.currentMap)

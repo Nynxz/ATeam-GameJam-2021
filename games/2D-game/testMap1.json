@@ -819,5 +819,15 @@
     "y": -288,
     "nextLevelName": "testMap2.json",
     "nextLevelDoor": "door_1"
+  },
+  "_32-96": {
+    "type": "enemy",
+    "x": 32,
+    "y": -96
+  },
+  "_864608": {
+    "type": "enemy",
+    "x": 864,
+    "y": 608
   }
 }
