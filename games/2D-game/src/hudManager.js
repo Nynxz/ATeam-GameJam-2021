@@ -24,7 +24,7 @@ class HUDManager {
             // Start Game
             new Button(width/2, 100, 600, 120, () => { 
 
-                loadJSON("testMap1.json", (json) => {
+                loadJSON("testMap.json", (json) => {
                     GameManager.currentLevel = new Map()
                     GameManager.currentLevel.loadMap(json, GameManager.currentLevel, true)
                 })
