@@ -25,11 +25,15 @@ class AsssetManager {
             nextLevelDoor: null
         },
         enemy: {
-            blob: null
+            blob: null,
+            deathSquare: null
         },
         tombStone: null,
         weapons: {
             pistol: null
+        },
+        projectiles: {
+            deathBeam: null
         }
     }
 
@@ -55,9 +59,12 @@ class AsssetManager {
         AsssetManager.assets.map.nextLevelDoor = loadImage("assets/nextLevelDoor.png")
 
         AsssetManager.assets.enemy.blob = loadImage("assets/blob.png")
+        AsssetManager.assets.enemy.deathSquare = loadImage("assets/death_square.png")
         AsssetManager.assets.tombStone = loadImage("assets/tombStone.png")
 
         AsssetManager.assets.weapons.pistol = loadImage("assets/pistol.png")
 
+        AsssetManager.assets.projectiles.deathBeam = loadImage("assets/death_beam.png")
+        
     }
 }

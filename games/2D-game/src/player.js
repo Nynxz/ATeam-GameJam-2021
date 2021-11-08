@@ -214,12 +214,11 @@ class Player{
     }
 
     enemyCollision(){
+        // Need a way to access the specific enemy and use it's damage.
         if (this.sprite.collide(LayerManager.layers.enemy)){
-            this.health = 0;
-        }
-        if(this.health <= 0){
-            this.health = 0
-            this.die()
+            this.damage(10);
+        }else if (this.sprite.collide(LayerManager.layers.projectiles)){
+            this.damage(100);
         }
     }
 

@@ -9,7 +9,8 @@ class LayerManager{
         environment: null,
         player: null,
         hud: null,
-        enemy: null
+        enemy: null,
+        projectiles: null
     }
 
     static testBuffer = null; 
@@ -26,6 +27,9 @@ class LayerManager{
 
         LayerManager.layers.enemy = new Group();
         LayerManager.layers.enemy.isEnabled = true;
+
+        LayerManager.layers.projectiles = new Group();
+        LayerManager.layers.projectiles.isEnabled = true;
 
         LayerManager.testBuffer = createGraphics(8000, 8000)
     }

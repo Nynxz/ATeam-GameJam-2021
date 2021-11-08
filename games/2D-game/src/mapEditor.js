@@ -432,8 +432,8 @@ class MapEditor {
 
         let pageItems = [
             {name: "concrete", image: AsssetManager.assets.map.ground},
-            {name: "enemy", image: AsssetManager.assets.enemy.blob},
-            {name: "player", image: AsssetManager.assets.mapEditor.penguinIcon},
+            {name: "blob", image: AsssetManager.assets.enemy.blob},
+            {name: "death square", image: AsssetManager.assets.enemy.deathSquare},
             {name: "door", image: AsssetManager.assets.mapEditor.doorIcon},
             {name: "nextlevel", image: AsssetManager.assets.map.nextLevelDoor},
             {name: "concrete", image: AsssetManager.assets.map.ground},
@@ -513,9 +513,14 @@ class Map{
                     sprite  = nextlevel.sprite
                 break;
 
-                case Tile.types.Enemy:
-                    let enemy = new BlobEnemy(x, y)
-                    sprite = enemy.sprite
+                case Tile.types.Blob:
+                    let blob = new BlobEnemy(x, y)
+                    sprite = blob.sprite
+                break;
+
+                case Tile.types.DeathSquare:
+                    let deathSquare = new DeathSquare(x, y)
+                    sprite = deathSquare.sprite
                 break;
 
                 default:
@@ -632,7 +637,8 @@ class Tile {
         PLAYER: "player",
         DOOR: "door",
         NEXTLEVEL: "nextlevel",
-        Enemy: "enemy"
+        Blob: "blob",
+        DeathSquare: "death square"
     }
 
     constructor(type, x, y){
@@ -658,8 +664,11 @@ class Tile {
             case Tile.types.NEXTLEVEL:
                 return AsssetManager.assets.map.nextLevelDoor
 
-            case Tile.types.Enemy:
+            case Tile.types.Blob:
                 return AsssetManager.assets.enemy.blob
+            
+            case Tile.types.DeathSquare:
+                return AsssetManager.assets.enemy.deathSquare
         }
     }
 }
