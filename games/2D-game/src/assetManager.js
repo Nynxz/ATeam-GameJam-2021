@@ -6,7 +6,9 @@ class AsssetManager {
             newMapButton: null,
             loadMapButton: null,
             exitButton: null,
-            back: null
+            back: null,
+            home: null,
+            restart: null
         },
         rune: {
             on: null,
@@ -44,6 +46,8 @@ class AsssetManager {
         AsssetManager.assets.buttons.loadMapButton = loadImage("assets/buttons/loadMapButton.png")
         AsssetManager.assets.buttons.exitButton = loadImage("assets/buttons/exitButton.png")
         AsssetManager.assets.buttons.back = loadImage("assets/buttons/backButton.png")
+        AsssetManager.assets.buttons.home = loadImage("assets/buttons/homeButton.png")
+        AsssetManager.assets.buttons.restart = loadImage("assets/buttons/restartButton.png")
         
         AsssetManager.assets.rune.on = loadImage("assets/runeOn.png")
         AsssetManager.assets.rune.off = loadImage("assets/runeOff.png")

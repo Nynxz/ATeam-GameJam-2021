@@ -433,7 +433,7 @@ class MapEditor {
         let pageItems = [
             {name: "concrete", image: AsssetManager.assets.map.ground},
             {name: "blob", image: AsssetManager.assets.enemy.blob},
-            {name: "death square", image: AsssetManager.assets.enemy.deathSquare},
+            {name: "player", image: AsssetManager.assets.mapEditor.penguinIcon},
             {name: "door", image: AsssetManager.assets.mapEditor.doorIcon},
             {name: "nextlevel", image: AsssetManager.assets.map.nextLevelDoor},
             {name: "concrete", image: AsssetManager.assets.map.ground},

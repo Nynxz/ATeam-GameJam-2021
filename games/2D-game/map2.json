@@ -957,5 +957,10 @@
     "x": 480,
     "y": -224,
     "nextLevelName": "testMap3.json"
+  },
+  "_736800": {
+    "type": "death square",
+    "x": 736,
+    "y": 800
   }
 }

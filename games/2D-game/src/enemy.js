@@ -4,7 +4,7 @@ class Enemy {
         this.sprite.debug = true;
         
         this.stats = stats;
-        this.hp = this.stats.maxHp;
+        //this.hp = this.stats.maxHp;
         
         this.sprite.setCollider("rectangle", 0, 0, 32, 32);
 
@@ -30,7 +30,7 @@ class EnemyStats {
     
     static BlobEnemy(scaled=false) {
         return new EnemyStats({
-            maxHp: scaled ? 10 * GameManager.player.level : 100,
+            //maxHp: scaled ? 10 * GameManager.player.level : 100,
             speed: 1,
             damage: 10
         })
@@ -38,7 +38,7 @@ class EnemyStats {
 
     static DeathSquareEnemy(scaled=false){
         return new EnemyStats({
-            maxHP: scaled ? 10 * GameManager.player.level : 100,
+            //maxHP: scaled ? 10 * GameManager.player.level : 100,
             speed: 1,
             damage: 5
         })

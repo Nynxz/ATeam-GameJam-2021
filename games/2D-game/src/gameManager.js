@@ -77,6 +77,12 @@ class GameManager{
             }
             // let r = rect(GameManager.player.weapon.position.x, GameManager.player.weapon.position.y, 50, 100)
             // r.rotate(a)
+
+            if(GameManager.player.health == 0){
+                // End the game loop.
+                // Bring up start menu again
+                window.location.reload();
+            }
         }
         LayerManager.drawLayers();
         GameManager.debugFPS();

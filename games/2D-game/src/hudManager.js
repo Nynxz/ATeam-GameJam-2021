@@ -24,7 +24,7 @@ class HUDManager {
             // Start Game
             new Button(width/2, 100, 600, 120, () => { 
 
-                loadJSON("testMap.json", (json) => {
+                loadJSON("map4.json", (json) => {
                     GameManager.currentLevel = new Map()
                     GameManager.currentLevel.loadMap(json, GameManager.currentLevel, true)
                 })
@@ -48,7 +48,7 @@ class HUDManager {
             }, AsssetManager.assets.buttons.newMapButton),
             // Load Map
             new Button(width/2, 400, 600, 120, () => {                 
-                loadJSON("testMap.json", (json) => {
+                loadJSON("map4.json", (json) => {
                     mapEditorStart.disableAll()
                     MapEditor.setupMapEditor()
                     MapEditor.currentMap.loadMap(json, MapEditor.currentMap)
@@ -62,6 +62,23 @@ class HUDManager {
         ])
     }
 
+    static gameEndMenus(){
+        let gameEndMenu = HUDManager.createMenu([
+            // Return Home
+            new Button(width/2, 100, 600, 120, () => {
+                gameEndMenu.switchTo(startMenu)
+            }, AsssetManager.assets.buttons.home),
+            // Restart
+            new Button(width/2, 400, 600, 120, () => { 
+                loadJSON("testMap.json", (json) => {
+                    GameManager.currentLevel = new Map()
+                    GameManager.currentLevel.loadMap(json, GameManager.currentLevel, true)
+                })
+                homeMenu.disableAll(); 
+                LayerManager.layers.hud.isEnabled = false
+            }, AsssetManager.assets.buttons.restart),
+        ])
+    }
 }
 
 class Button{
