@@ -818,7 +818,7 @@
         "y": 288,
         "info": {
           "radius": 150,
-          "secondsToActivate": 5
+          "secondsToActivate": 8
         },
         "toActivate": {
           "x": 672,
@@ -831,7 +831,7 @@
         "y": -32,
         "info": {
           "radius": 150,
-          "secondsToActivate": 5
+          "secondsToActivate": 8
         },
         "toActivate": {
           "x": 672,
@@ -844,7 +844,7 @@
         "y": -288,
         "info": {
           "radius": 400,
-          "secondsToActivate": 5
+          "secondsToActivate": 8
         },
         "toActivate": {
           "x": 672,
@@ -956,11 +956,6 @@
     "type": "nextlevel",
     "x": 480,
     "y": -224,
-    "nextLevelName": "testMap3.json"
-  },
-  "_736800": {
-    "type": "death square",
-    "x": 736,
-    "y": 800
+    "nextLevelName": "map3.json"
   }
 }

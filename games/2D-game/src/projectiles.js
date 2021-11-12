@@ -17,6 +17,8 @@ class Projectile {
     draw(){
         this.superDraw();
         this.offScreenRemoval();
+        this.playerCollisionRemoval();
+        this.environmentCollisionRemoval();
     }
 
     offScreenRemoval(){
@@ -25,9 +27,19 @@ class Projectile {
             this.sprite.position.y < 0 ||
             this.sprite.position.y > GameManager.settings.CONSTANTS.SCREEN_H){
                 this.sprite.remove();
-                // Make the sprite null to ensure it is gone if remove does not work as intended.
-                this.sprite = null;
             }
+    }
+
+    playerCollisionRemoval(){
+        if(this.sprite.overlap(LayerManager.layers.player)){
+            this.sprite.remove();
+        }
+    }
+
+    environmentCollisionRemoval(){
+        if(this.sprite.overlap(LayerManager.layers.environment)){
+            this.sprite.remove();
+        }
     }
 }
 

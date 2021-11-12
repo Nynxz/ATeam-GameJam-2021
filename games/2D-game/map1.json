@@ -777,7 +777,7 @@
     "type": "nextlevel",
     "x": 608,
     "y": -288,
-    "nextLevelName": "testMap2.json",
+    "nextLevelName": "map2.json",
     "nextLevelDoor": "door_1"
   },
   "_544608": {
@@ -876,15 +876,10 @@
     "x": 288,
     "y": 288
   },
-  "_118432": {
-    "type": "death square",
-    "x": 1184,
-    "y": 32
-  },
   "_32-96": {
     "type": "blob",
     "x": 32,
-    "y": -96
+    "y": -92
   },
   "_736-480": {
     "type": "concrete",

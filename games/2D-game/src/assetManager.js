@@ -36,6 +36,10 @@ class AsssetManager {
         },
         projectiles: {
             deathBeam: null
+        },
+        sounds: {
+            zap: null,
+            player_died: null
         }
     }
 
@@ -70,5 +74,9 @@ class AsssetManager {
 
         AsssetManager.assets.projectiles.deathBeam = loadImage("assets/death_beam.png")
         
+        AsssetManager.assets.sounds.zap = loadSound("assets/sounds/zap_hit.mp3")
+        AsssetManager.assets.sounds.player_died = loadSound("assets/sounds/player_died.mp3")
+        AsssetManager.assets.sounds.zap.setVolume(0.2)
+        AsssetManager.assets.sounds.player_died.setVolume(0.2)
     }
 }

@@ -10,7 +10,7 @@ class Rune {
         this.number = null;
         this.superDraw = this.sprite.draw;
         this.sprite.draw = this.draw.bind(this);
-        this.sprite.debug = true;
+        //this.sprite.debug = true;
         LayerManager.layers.environment.add(this.sprite);
 
         this.secondsToActivate = secondsToActivate

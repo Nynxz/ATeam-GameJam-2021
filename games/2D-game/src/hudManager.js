@@ -24,7 +24,7 @@ class HUDManager {
             // Start Game
             new Button(width/2, 100, 600, 120, () => { 
 
-                loadJSON("map4.json", (json) => {
+                loadJSON("map1.json", (json) => {
                     GameManager.currentLevel = new Map()
                     GameManager.currentLevel.loadMap(json, GameManager.currentLevel, true)
                 })
@@ -48,7 +48,7 @@ class HUDManager {
             }, AsssetManager.assets.buttons.newMapButton),
             // Load Map
             new Button(width/2, 400, 600, 120, () => {                 
-                loadJSON("map4.json", (json) => {
+                loadJSON("map3.json", (json) => {
                     mapEditorStart.disableAll()
                     MapEditor.setupMapEditor()
                     MapEditor.currentMap.loadMap(json, MapEditor.currentMap)
@@ -98,7 +98,7 @@ class Button{
         this.sprite.setDefaultCollider()
         this.sprite.visible = false
         this.sprite.removed = true
-        this.sprite.debug = GameManager.settings.CONSTANTS.DEBUG
+        //this.sprite.debug = GameManager.settings.CONSTANTS.DEBUG
     }
 
     _resizeImage(image, width, height){

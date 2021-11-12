@@ -1,7 +1,7 @@
 class Enemy {
     constructor(x, y, stats){
         this.sprite = createSprite(x, y);
-        this.sprite.debug = true;
+        //this.sprite.debug = true;
         
         this.stats = stats;
         //this.hp = this.stats.maxHp;
@@ -73,8 +73,7 @@ class BlobEnemy extends Enemy{
     }
 
     applyGravity(){
-        this.sprite.friction = 0.0001;
-        this.sprite.velocity.y = 0.01;
+        this.sprite.friction = 0.001;
     }
 }
 
@@ -100,8 +99,10 @@ class DeathSquare extends Enemy {
         if (frameCount % 300 == 0){
             if ( this.sprite.position.x > (GameManager.settings.CONSTANTS.SCREEN_W / 2 ) ) {
                 this.shot = new DeathBeam(this.sprite.position.x, this.sprite.position.y, -2, 16);
+                console.log(this.shot);
             }else if ( this.sprite.position.x < (GameManager.settings.CONSTANTS.SCREEN_W / 2 ) ){
                 this.shot = new DeathBeam(this.sprite.position.x, this.sprite.position.y, 2, 16);
+                console.log(this.shot);
             }
         }
     }

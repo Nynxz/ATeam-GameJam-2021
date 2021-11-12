@@ -66,22 +66,25 @@ class GameManager{
 
             let x = Math.floor(mPos.x/(tS)) * tS + tS/2
             let y = Math.floor(mPos.y/(tS)) * tS + tS/2
-            a = atan2(mPos.y - GameManager.player.weapon.position.y, mPos.x - GameManager.player.weapon.position.x);
-            if(a + 90 > 0 && a + 90 < 180){
-                GameManager.player.weapon.mirrorY(1)
-                GameManager.player.weapon.rotation = a
+            //a = atan2(mPos.y - GameManager.player.weapon.position.y, mPos.x - GameManager.player.weapon.position.x);
+            //if(a + 90 > 0 && a + 90 < 180){
+            //    GameManager.player.weapon.mirrorY(1)
+            //    GameManager.player.weapon.rotation = a
 
-            } else {
-                GameManager.player.weapon.mirrorY(-1)
-                GameManager.player.weapon.rotation = a * -1
-            }
+            //} else {
+            //    GameManager.player.weapon.mirrorY(-1)
+            //    GameManager.player.weapon.rotation = a * -1
+            //}
             // let r = rect(GameManager.player.weapon.position.x, GameManager.player.weapon.position.y, 50, 100)
             // r.rotate(a)
 
             if(GameManager.player.health == 0){
                 // End the game loop.
                 // Bring up start menu again
-                window.location.reload();
+                if(!AsssetManager.assets.sounds.player_died.isPlaying()){
+                    AsssetManager.assets.sounds.player_died.play();
+                }
+                setTimeout(()=> {window.location.reload();},200);
             }
         }
         LayerManager.drawLayers();

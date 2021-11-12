@@ -209,7 +209,7 @@
     "y": -224,
     "info": {
       "radius": 200,
-      "secondsToActivate": 3
+      "secondsToActivate": 4
     },
     "toActivate": {
       "x": 928,
@@ -297,7 +297,7 @@
         "y": -224,
         "info": {
           "radius": 200,
-          "secondsToActivate": 3
+          "secondsToActivate": 5
         },
         "toActivate": {
           "x": 928,
@@ -310,7 +310,7 @@
         "y": -32,
         "info": {
           "radius": 200,
-          "secondsToActivate": 4
+          "secondsToActivate": 5
         },
         "toActivate": {
           "x": 928,
@@ -323,7 +323,7 @@
         "y": 160,
         "info": {
           "radius": 200,
-          "secondsToActivate": 4
+          "secondsToActivate": 5
         },
         "toActivate": {
           "x": 928,
@@ -608,7 +608,41 @@
   "_112096": {
     "type": "nextlevel",
     "x": 1120,
-    "y": 96
+    "y": 96,
+    "nextLevelName": "map4.json"
+  },
+  "_124896": {
+    "type": "door",
+    "x": 1248,
+    "y": 96,
+    "runes": {
+      "_1440-416": {
+        "type": "rune",
+        "x": 1440,
+        "y": -416,
+        "info": {
+          "radius": 150,
+          "secondsToActivate": 8
+        },
+        "toActivate": {
+          "x": 1248,
+          "y": 96
+        }
+      },
+      "_1120-224": {
+        "type": "rune",
+        "x": 1120,
+        "y": -224,
+        "info": {
+          "radius": 150,
+          "secondsToActivate": 8
+        },
+        "toActivate": {
+          "x": 1248,
+          "y": 96
+        }
+      }
+    }
   },
   "_1440-416": {
     "type": "rune",
@@ -616,7 +650,7 @@
     "y": -416,
     "info": {
       "radius": 150,
-      "secondsToActivate": 2
+      "secondsToActivate": 8
     }
   },
   "_1120-224": {
@@ -625,7 +659,7 @@
     "y": -224,
     "info": {
       "radius": 150,
-      "secondsToActivate": 2
+      "secondsToActivate": 8
     }
   }
 }

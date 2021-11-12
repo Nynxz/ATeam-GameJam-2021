@@ -5,7 +5,7 @@ class NextLevelDoor{
 
         this.sprite = createSprite(x, y + GameManager.settings.CONSTANTS.TILESIZE/2)
         this.loadAnimations()
-        this.sprite.debug = true
+        //this.sprite.debug = true
         this.sprite.addImage("image", AsssetManager.assets.map.nextLevelDoor)
         //this.sprite.setCollider("rectangle", 0, -GameManager.settings.CONSTANTS.TILESIZE, 64, 128)
         LayerManager.layers.environment.add(this.sprite)

@@ -26,7 +26,7 @@ class Player{
         }
 
         this.jumpTimeout = 2000
-        this.sprite.debug = true
+        //this.sprite.debug = true
         this.sprite.maxSpeed = 12
         this.isSliding = false;
 
@@ -36,33 +36,21 @@ class Player{
         this.health = 100
         this.maxHealth = 100
 
-        this.weapon = createSprite(this.sprite.position.x, this.sprite.position.y)
-        LayerManager.layers.player.add(this.weapon)
-        this.weapon.addImage("pistol", AsssetManager.assets.weapons.pistol)
-        this.weapon.scale = 2
+        // Not using weapon. Just dodging enemies
+        //this.weapon = createSprite(this.sprite.position.x, this.sprite.position.y)
+        //LayerManager.layers.player.add(this.weapon)
+        //this.weapon.addImage("pistol", AsssetManager.assets.weapons.pistol)
+        //this.weapon.scale = 2
 
     }
 
+    /* Didn't implement a heal
     heal(amount){
         this.health += amount
         if(this.health > this.maxHealth){
             this.health = this.maxHealth
         }
-    }
-
-    damage(amount){
-        this.health -= amount
-        if(this.health <= 0){
-            this.health = 0
-            this.die()
-        }
-    }
-
-    die() {
-        GameManager.player.disabledMovement = true;
-        this.sprite.changeImage("dead")
-    }
-
+    }*/
 
     clearTimeouts() {
         this.timeouts = {
@@ -74,7 +62,7 @@ class Player{
     // This function will run every frame the sprite is visible
     draw() {
         this.superDraw();
-        this.weapon.position = this.sprite.position
+        //this.weapon.position = this.sprite.position
 
         //console.log(this.weapon.rotation)
         let moved = false
@@ -169,7 +157,7 @@ class Player{
                     // Get Velocity
                     // Add Fall Damage
                     if(this.sprite.velocity.y > 11.5)
-                    this.damage(this.sprite.velocity.y)
+                    this.damage(this.sprite.velocity.y/2)
                 }
                 this.isAirborne = false;
                 
@@ -201,26 +189,26 @@ class Player{
             this.sprite.friction = 0.01
             this.sprite.velocity.y += 0.3
         } else if(!this.isSliding){
-            this.sprite.friction = 0.3
+            this.sprite.friction = 0.25
             this.sprite.velocity.y -= 0.03;
-        }
-    }
-
-    heal(amount){
-        this.health += amount
-        if(this.health > this.maxHealth){
-            this.health = this.maxHealth
         }
     }
 
     enemyCollision(){
         // Need a way to access the specific enemy and use it's damage.
         if (this.sprite.collide(LayerManager.layers.enemy)){
-            this.damage(10);
+            this.damage(5);
         }else if (this.sprite.collide(LayerManager.layers.projectiles)){
-            this.damage(100);
+            this.damage(10);
+            if(!AsssetManager.assets.sounds.zap.isPlaying()){
+                AsssetManager.assets.sounds.zap.play();
+            }
+            for(let object of LayerManager.layers.environment){
+                console.log(object);
+            }
         }
     }
+
 
     damage(amount){
         this.health -= amount
